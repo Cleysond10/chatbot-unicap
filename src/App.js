@@ -138,7 +138,7 @@ function App() {
     {
       id: 'resp_nova_pergunta',
       options: [
-        { value: 'a', label: 'Sim', trigger: 'perguntas-principais' },
+        { value: 'a', label: 'Sim', trigger: 'perguntas_principais' },
         { value: 'b', label: 'Não', trigger: 'finalizacao' },
       ]
     },
