@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ChatBot from 'react-simple-chatbot';
+import { ChatBotWrapper } from './App.style';
 
 function App() {
   const [nome, setNome] = useState('');
@@ -147,11 +147,11 @@ function App() {
       message: 'Obrigado por utilizar o Chatbot!',
       end: true,
     },
-    ];
+  ];
 
   return (    
     <div >
-      <ChatBot steps={steps} />
+      <ChatBotWrapper steps={steps} />
     </div>
   );
 }
