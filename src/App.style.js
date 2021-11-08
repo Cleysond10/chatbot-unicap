@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ChatBot from 'react-simple-chatbot';
+import image from '../src/assets/unicap.png';
 
 export const ChatBotWrapper = styled(ChatBot)`
   position: absolute;
@@ -16,6 +17,9 @@ export const ChatBotWrapper = styled(ChatBot)`
     bottom: 0px;
     height: auto;
     width: auto;
+    background-image: url(${image});
+    background-repeat: no-repeat;
+    background-position: center;
 
     > .itYrWC {
       visibility: hidden;
