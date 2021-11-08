@@ -305,7 +305,7 @@ function App() {
     },
   ];
 
-  return (
+  return (    
     <div >
       <ChatBotWrapper steps={steps} />
     </div>
