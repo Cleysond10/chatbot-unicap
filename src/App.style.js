@@ -17,12 +17,14 @@ export const ChatBotWrapper = styled(ChatBot)`
     height: auto;
     width: auto;
 
+    
+
     > .itYrWC {
       visibility: hidden;
       
       :after {
-        content:'Chat';
-        background: #6E48AA;
+        content:'Chatbot  sobre Estágio da UNICAP';
+        background: #690013;
         visibility: visible;
         display: flex;
         position: absolute;
@@ -36,18 +38,18 @@ export const ChatBotWrapper = styled(ChatBot)`
     }
 
     > .bWzQeJ {
-      height: 85vh;
-      > .jwHqZn {
-        > .jEeqIW {
-          background: #6E48AA;
-        }
-        > .erOoyR {
-          background: #6E48AA;
-        }
-      }
+      height: 82vh;
+      
       & > div > ul > li > button {
-        background: #6E48AA;        
-      }
+        background: #811419;
+      }      
+    }
+    
+    .bWzQeJ > div div:nth-child(2) {
+      background: #9d7628;        
+    }
+    .bWzQeJ > div .iwuaA:nth-child(2) {
+      background: #fff;
     }
 
     > .eSbvKF {
@@ -55,7 +57,7 @@ export const ChatBotWrapper = styled(ChatBot)`
       left: 0px;
       right: 0px;
       bottom: 0px;
-      margin: 25px;
+      margin: 5px;
     }
   }
 `;
