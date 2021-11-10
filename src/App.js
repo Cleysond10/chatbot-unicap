@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChatBotWrapper } from './App.style';
 
 function App() {
   const [nome, setNome] = useState('');
   const [matricula, setMatricula] = useState(0);
   const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  useEffect(() => {   
+     console.log(message);  
+    }, [message]);
 
   const steps = [
     {
@@ -118,7 +122,7 @@ function App() {
     {
       id: 'resp_1',
       message: 'Estágio é ato educativo escolar supervisionado, desenvolvido no ambiente de trabalho, que visa à preparação para o trabalho produtivo de estudantes. O estágio integra o itinerário formativo do estudante e faz parte do projeto pedagógico do curso (art. 1º).',
-      trigger: 'nova_pergunta',
+      trigger: 'satisfatorio',
     },
     {
       id: 'resp_2',
@@ -391,16 +395,34 @@ function App() {
     {
       id: 'perg_personalizada',
       options: [
-        { value: 'a', label: 'Sim', trigger: 'criacao_perg_pers' },
+        { value: 'a', label: 'Sim', trigger: 'perg_pers' },
         { value: 'b', label: 'Não', trigger: 'nova_pergunta' },
       ]
     },
     {
+      id: 'perg_pers',
+      message: 'Escreva a pergunta personalizada que deseja enviar para o coordenador:',
+      trigger: 'escrever_pergunta_personalizada',
+    },
+    {
+      id: 'escrever_pergunta_personalizada',
+      user: true,
+      validator: (value) => {
+        if (value != "") {
+          setMessage(value);          
+          return true;
+        }
+        else {
+          return 'Por favor, digite uma pergunta válida.';
+        }
+      },
+      trigger: 'criacao_perg_pers',
+    },
+    {
       id: 'criacao_perg_pers',
-      message: 'Sua pergunta será recebida e enviada ao coordenador num futuro update do programa. (falta implementar)',
+      message: 'Sua pergunta será enviada ao coordenador. (falta implementar)',
       trigger: 'nova_pergunta',
     },
-
     {
       id: 'nova_pergunta',
       message: 'Deseja tirar uma nova dúvida?.',
