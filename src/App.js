@@ -96,8 +96,8 @@ function App() {
       options: [
         { value: 'a', label: 'Dúvidas gerais sobre estágio', trigger: 'dúvidas_gerais' },
         { value: 'b', label: 'Dúvidas sobre as partes envolvidas no estágio', trigger: 'dúvidas_partes' },   
-        { value: 'c', label: 'Dúvidas sobre contrato de estágio', trigger: 'coord-response' }, // coord-response não é o trigger, não foi desenvolvido ainda. 
-        { value: 'd', label: 'Dúvidas sobre as atividades desenvolvidas durante o estágio', trigger: 'coord-response' },// coord-response não é o trigger, não foi desenvolvido ainda. 
+        { value: 'c', label: 'Dúvidas sobre contrato de estágio', trigger: 'dúvidas_contrato' }, 
+        { value: 'd', label: 'Dúvidas sobre as atividades desenvolvidas durante o estágio', trigger: 'dúvidas_atividades' },// coord-response não é o trigger, não foi desenvolvido ainda. 
         { value: 'e', label: 'Dúvidas sobre direito dos estagiários', trigger: 'coord-response' },// coord-response não é o trigger, não foi desenvolvido ainda. 
         { value: 'f', label: 'Dúvidas sobre o termo de compromisso de estágio', trigger: 'coord-response' }, // coord-response não é o trigger, não foi desenvolvido ainda. 
       ]
@@ -254,6 +254,121 @@ function App() {
     {
       id: 'resp_6',
       message: 'Sim, desde que o estudante estrangeiro esteja regularmente matriculado em curso superior no país autorizado ou reconhecido e seja observado o prazo do visto temporário de estudante, na forma da legislação aplicável (art. 4º).',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'dúvidas_contrato',
+      message: 'Selecione uma opção abaixo:',
+      trigger: 'perguntas_contrato',
+    },
+    {
+      id: 'perguntas_contrato',
+      options: [
+        { value: 'a', label: 'O estágio cria vínculo empregatício?', trigger: 'resp_7' },
+        { value: 'b', label: 'Quais são os principais requisitos legais que devem ser observados para a formação da relação de estágio?', trigger: 'resp_8' },
+        { value: 'c', label: 'O estagiário precisa ter Carteira de Trabalho?', trigger: 'resp_42' },
+        { value: 'd', label: 'Quais as providências e documentos necessários à comprovação da regularidade do estágio?', trigger: 'resp_43' },
+        { value: 'e', label: 'O contrato de estágio firmado na vigência da lei anterior precisa ser alterado?', trigger: 'resp_46' },
+        { value: 'f', label: 'Dúvidas específicas sobre o descumprimento do contrato.', trigger: 'desc_contr' },
+      ]
+    },
+    {
+      id: 'desc_contr',
+      message: 'Selecione uma opção abaixo:',
+      trigger: 'perguntas_contrato_desc',
+    },
+    {
+      id: 'perguntas_contrato_desc',
+      options: [
+        { value: 'a', label: 'Qual a consequência prevista para a parte concedente no descumprimento da Lei nº 11.788/2008?', trigger: 'resp_44' },
+        { value: 'b', label: 'Quais as hipóteses em que a concedente poderá ficar impedida de receber estagiários?', trigger: 'resp_45' },
+      ]
+    },
+    {
+      id: 'resp_7',
+      message: 'O estágio é regido por legislação própria e, desde que observados os requisitos legais e as obrigações contidas no termo de compromisso de estágio, não estabelece vínculo empregatício de qualquer natureza, para todos os fins da legislação trabalhista e previdenciária (caput e § 2º do art. 3º c/c art. 15).',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_8',
+      message: 'Para formação da relação de estágio, devem ser observados os seguintes requisitos: a) matrícula e frequência regular do estudante público-alvo da lei; b) celebração do termo de compromisso entre o estudante, a parte concedente do estágio e a instituição de ensino; e c) compatibilidade entre as atividades desenvolvidas no estágio e as previstas no termo de compromisso. (incisos, I, II, III do art. 3º).',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_42',
+      message: 'Não há obrigatoriedade para a expedição e anotação do estágio na Carteira de Trabalho e Previdência Social, uma vez que estágio não é emprego, sendo definido em legislação própria',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_43',
+      message: 'a) o termo de compromisso de estágio, devidamente assinado pela empresa concedente, pela instituição de ensino e pelo estudante; b) o certificado individual de seguro de acidentes pessoais; c) comprovação da regularidade da situação escolar do estudante; d) comprovante de pagamento da bolsa ou equivalente e do auxílio-transporte; e e) verificação da compatibilidade entre as atividades desenvolvidas no estágio e aquelas previstas no termo de compromisso. (Cartilha Esclarecedora sobre a Lei de Estágio / MTE).',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_46',
+      message: 'O contrato firmado na vigência da lei anterior permanecerá válido até o término da sua vigência. Todavia, sua eventual prorrogação ou renovação ocorrida a partir da data da vigência da nova lei, ou seja, a partir de 26 de setembro de 2008, deverá ser feita com observância das novas regras.',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_44',
+      message: 'A manutenção de estagiários em desconformidade com esta lei caracteriza vínculo empregatício do educando com a parte concedente do estágio para todos os fins da legislação trabalhista e previdenciária. (caput do art. 15 da Lei nº 11.788/2008',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_45',
+      message: 'Nas hipóteses em que a concedente reincidir no descumprimento da lei, ficará impedida de receber estagiários por 2 (dois) anos, contados da data da decisão definitiva do processo administrativo correspondente. Essa penalidade limita-se à filial ou agência em que for cometida a irregularidade (§§1º e 2º do art. 15).',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'dúvidas_atividades',
+      message: 'Selecione uma opção abaixo:',
+      trigger: 'perguntas_atividades',
+    },
+    {
+      id: 'perguntas_atividades',
+      options: [
+        { value: 'a', label: 'O estágio deve ter acompanhamento efetivo pelo professor orientador da instituição de ensino e pelo supervisor da parte concedente?', trigger: 'resp_9' },
+        { value: 'b', label: 'Qual o prazo máximo de duração do estágio na mesma unidade concedente?', trigger: 'resp_21' },
+        { value: 'c', label: 'Dúvidas específicas sobre a jornada de estágio', trigger: 'perguntas_atividades_jornada' },
+      ]
+    },
+    {
+      id: 'perguntas_atividades_jornada',
+      options: [
+        { value: 'a', label: 'Como deve ser definida a jornada de atividade do estagiário?', trigger: 'resp_17' },
+        { value: 'b', label: 'Qual a duração máxima da jornada de atividade de estágio?', trigger: 'resp_18' },
+        { value: 'c', label: 'Como deve ser feita a concessão dos descansos durante a jornada de estágio?', trigger: 'resp_19' },
+        { value: 'd', label: 'A jornada de estágio deve ser reduzida nos períodos de avaliação escolar?', trigger: 'resp_20' },
+      ]
+    },
+    {
+      id: 'resp_9',
+      message: 'Sim. O estágio como ato educativo escolar supervisionado deve ter acompanhamento efetivo pelo professor orientador da instituição de ensino e pelo supervisor da parte concedente, comprovado por vistos nos relatórios de atividades (em prazo não superior a seis meses) e por menção de aprovação final (§ 1º do art. 3º). O supervisor da parte concedente somente pode orientar e supervisionar até 10 (dez) estagiários simultaneamente (inciso III, do art. 9º).',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_21',
+      message: 'A duração do estágio, na mesma unidade concedente, não poderá exceder 2 (dois) anos, exceto quando se tratar de estagiário portador de deficiência (art. 11).',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_17',
+      message: 'A jornada de atividade em estágio deve ser definida de comum acordo entre a instituição de ensino, a parte concedente e o estudante ou seu assistente ou representante legal, devendo constar do termo de compromisso de estágio, ser compatível com as atividades escolares e observação da duração máxima prevista na lei (caput do art. 10).',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_18',
+      message: 'A jornada de atividade em estágio não deve ultrapassar: a) 4 (quatro) horas diárias e 20 (vinte) horas semanais, no caso de estudantes de educação especial e dos anos finais do ensino fundamental, na modalidade de educação de jovens e adultos; b) 6 (seis) horas diárias e 30 (trinta) horas semanais, no caso de estudantes do ensino superior, da educação profissional de nível médio e do ensino médio regular; c) 40 (quarenta) horas semanais, no caso do estágio relativo a cursos que alternam teoria e prática, nos períodos em que não estão programadas aulas presenciais, desde que previsto no projeto pedagógico do curso e da instituição de ensino (incisos I, II e § 1º do art. 10).',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_19',
+      message: 'A concessão do descanso durante a jornada de estágio deve ser definida de comum acordo entre a instituição de ensino, a parte concedente e o estudante ou seu assistente ou representante legal, devendo constar do termo de compromisso de estágio. Recomenda-se a observância de período suficiente à preservação da saúde física e mental do estagiário e respeito aos padrões de horário de alimentação – lanche, almoço e jantar. O período de intervalo não é computado na jornada de estágio. (Cartilha Esclarecedora sobre a Lei de Estágio/MTE)',
+      trigger: 'nova_pergunta',
+    },
+    {
+      id: 'resp_20',
+      message: 'Sim, caso a instituição de ensino adote verificações de aprendizagem periódicas ou finais nos períodos de avaliação, a carga horária do estágio será reduzida pelo menos à metade, segundo o estipulado no termo de compromisso de estágio. Nesse caso, a instituição de ensino deverá comunicar à parte concedente do estágio, no início do período letivo, as datas de realização de avaliações escolares ou acadêmicas (§ 2º do art. 10 e inciso VII do art. 7º).',
       trigger: 'nova_pergunta',
     },
     {
