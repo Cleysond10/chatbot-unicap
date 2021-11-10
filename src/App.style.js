@@ -37,12 +37,12 @@ export const ChatBotWrapper = styled(ChatBot)`
         right: 0px;
         height: 40px;
         font-size: 20px;
-        padding: 20px 0 0 20px;
+        padding: 18px 0 0 18px;
       }
     }
 
     > .bWzQeJ {
-      height: 82vh;
+      height: 88vh;
       
       & > div > ul > li > button {
         background: #811419;
@@ -57,11 +57,10 @@ export const ChatBotWrapper = styled(ChatBot)`
     }
 
     > .eSbvKF {
-      position: absolute;
       left: 0px;
       right: 0px;
       bottom: 0px;
-      margin: 5px;
+      margin: 2px;
     }
   }
 `;
