@@ -100,7 +100,7 @@ function App() {
       options: [
         { value: 'a', label: 'Dúvidas gerais sobre estágio', trigger: 'dúvidas_gerais' },
         { value: 'b', label: 'Dúvidas sobre as partes envolvidas no estágio', trigger: 'dúvidas_partes' },   
-        { value: 'c', label: 'Dúvidas sobre contrato de estágio', trigger: 'dúvidas_contrato' }, 
+        { value: 'c', label: 'Dúvidas sobre contrato de estágio', trigger: 'dúvidas_contrato' },
         { value: 'd', label: 'Dúvidas sobre as atividades desenvolvidas durante o estágio', trigger: 'dúvidas_atividades' },// coord-response não é o trigger, não foi desenvolvido ainda. 
         { value: 'e', label: 'Dúvidas sobre direito dos estagiários', trigger: 'coord-response' },// coord-response não é o trigger, não foi desenvolvido ainda. 
         { value: 'f', label: 'Dúvidas sobre o termo de compromisso de estágio', trigger: 'coord-response' }, // coord-response não é o trigger, não foi desenvolvido ainda. 
