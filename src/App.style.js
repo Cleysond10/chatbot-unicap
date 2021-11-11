@@ -21,8 +21,6 @@ export const ChatBotWrapper = styled(ChatBot)`
     background-repeat: no-repeat;
     background-position: center;
 
-    
-
     > .itYrWC {
       visibility: hidden;
       

@@ -1,5 +1,6 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from '../src/App';
+import { Dashboard } from './pages/Dashboard/Dashboard';
 
 const Router = () => {
   return (
@@ -9,7 +10,7 @@ const Router = () => {
           <App />
         </Route>
         <Route path='/dashboard'>
-          <div>BEM-VINDO, COORDENADOR!</div>
+          <Dashboard />
         </Route>
         <Route >
           <h1>ERROR 404: PAGE NOT FOUND</h1>
