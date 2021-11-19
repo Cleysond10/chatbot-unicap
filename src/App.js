@@ -1,15 +1,43 @@
 import { useState, useEffect } from 'react';
+
 import { ChatBotWrapper } from './App.style';
 
-function App() {
+import {
+  useMutation,
+  gql
+} from "@apollo/client";
+
+const ADD_QUEST = gql`
+  mutation AddTodos($nome_aluno: String!, $mat_aluno: String!, $email_aluno: String!, $pergunta: String!) {
+  insert_perguntas_aluno(objects: {nome_aluno: $nome_aluno, mat_aluno: $mat_aluno, email_aluno: $email_aluno, pergunta: $pergunta}) {
+    returning {
+      mat_aluno
+      pergunta
+      nome_aluno
+    }
+  }
+}
+`;
+
+function App() { 
+
   const [nome, setNome] = useState('');
   const [matricula, setMatricula] = useState(0);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');  
   const [message, setMessage] = useState('');
-  useEffect(() => {   
-     console.log(message);  
-    }, [message]);
 
+  useEffect(() => {
+    if(message != '') {
+      addQuestionMutation({ variables: 
+        { nome_aluno: nome, mat_aluno: matricula + "",
+         email_aluno: email, pergunta: message } // comentar o porque matricula
+        });
+      console.log(data);
+    }
+  }, [message]);
+  
+  const [addQuestionMutation, {data}] = useMutation(ADD_QUEST);  
+  
   const steps = [
     {
       id: '0',
@@ -410,7 +438,8 @@ function App() {
       validator: (value) => {
         if (value != "") {
           setMessage(value);          
-          return true;
+          
+          return true;          
         }
         else {
           return 'Por favor, digite uma pergunta válida.';
@@ -420,7 +449,7 @@ function App() {
     },
     {
       id: 'criacao_perg_pers',
-      message: 'Sua pergunta será enviada ao coordenador. (falta implementar)',
+      message: 'Sua pergunta já foi enviada ao coordenador, aguarde retorno.',
       trigger: 'nova_pergunta',
     },
     {
@@ -441,12 +470,12 @@ function App() {
       end: true,
     },
   ];
-
-  return (    
-    <div >
+  
+  return (
+    <div> 
       <ChatBotWrapper steps={steps} />
     </div>
-  );
+  );  
 }
 
 export default App;
