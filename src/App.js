@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ChatBotWrapper } from './App.style';
+import { useHistory } from 'react-router-dom'
 
 function App() {
   const [nome, setNome] = useState('');
@@ -9,6 +10,10 @@ function App() {
   useEffect(() => {   
      console.log(message);  
     }, [message]);
+  const history = useHistory();
+  const goToCoord = () => {
+    history.push('/dashboard'); 
+  };
 
   const steps = [
     {
@@ -30,8 +35,8 @@ function App() {
     },
     {
       id: 'coord-response',
-      message: 'Verifique o seu e-mail para receber as perguntas.',
-      end: true,
+      message: 'Informe seu nome',
+      trigger: 'input-name-coordenador',
     },
     {
       id: 'aluno-response',
@@ -58,6 +63,30 @@ function App() {
       trigger: 'input-matricula',
     },
     {
+      id: 'input-name-coordenador',
+      user: true,
+      validator: (value) => {
+        if (/^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/.test(value)) {
+          setNome(value);
+          return true;
+        }
+        else {
+          return 'Por favor, digite apenas letras.';
+        }
+      },
+      trigger: 'matricula-coord',
+    },
+    {
+      id: 'matricula',
+      message: 'Informe sua matrícula:',
+      trigger: 'input-matricula',
+    },
+    {
+      id: 'matricula-coord',
+      message: 'Informe seu ID de coordenador',
+      trigger: 'input-matricula-coord',
+    },
+    {
       id: 'input-matricula',
       user: true,
       validator: (value) => {
@@ -70,6 +99,25 @@ function App() {
         }
       },
       trigger: 'email',
+    },
+    {
+      id: 'input-matricula-coord',
+      user: true,
+      validator: (value) => {
+        if (/^[0-9]*$/.test(value)) {
+          setMatricula(value);
+          return true;
+        }
+        else {
+          return 'Por favor, digite apenas números.';
+        }
+      },
+      trigger: 'pagina-coord',
+    },
+    {
+      id: 'pagina-coord',
+      message: 'Encaminhado para a página do coordenador',
+      trigger: goToCoord, // AQUII CHAMADA DA ROTA !!
     },
     {
       id: 'email',
