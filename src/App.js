@@ -1,15 +1,49 @@
 import { useState, useEffect } from 'react';
-import { ChatBotWrapper } from './App.style';
 
-function App() {
+import { ChatBotWrapper } from './App.style';
+import { useHistory } from 'react-router-dom'
+
+import {
+  useMutation,
+  gql
+} from "@apollo/client";
+
+const ADD_QUEST = gql`
+  mutation AddTodos($nome_aluno: String!, $mat_aluno: String!, $email_aluno: String!, $pergunta: String!) {
+  insert_perguntas_aluno(objects: {nome_aluno: $nome_aluno, mat_aluno: $mat_aluno, email_aluno: $email_aluno, pergunta: $pergunta}) {
+    returning {
+      mat_aluno
+      pergunta
+      nome_aluno
+    }
+  }
+}
+`;
+
+function App() { 
+
   const [nome, setNome] = useState('');
   const [matricula, setMatricula] = useState(0);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');  
   const [message, setMessage] = useState('');
-  useEffect(() => {   
-     console.log(message);  
-    }, [message]);
 
+  useEffect(() => {
+    if(message != '') {
+      addQuestionMutation({ variables: 
+        { nome_aluno: nome, mat_aluno: matricula + "",
+         email_aluno: email, pergunta: message } // Como matricula é um inteiro(NUMBER), precisei converter pra String com aspas vazias.
+        });
+      console.log(data);
+    }
+  }, [message]);
+  
+  const [addQuestionMutation, {data}] = useMutation(ADD_QUEST); 
+ 
+  const history = useHistory();
+  const goToCoord = () => {
+    history.push('/dashboard'); 
+  };
+  
   const steps = [
     {
       id: '0',
@@ -30,8 +64,8 @@ function App() {
     },
     {
       id: 'coord-response',
-      message: 'Verifique o seu e-mail para receber as perguntas.',
-      end: true,
+      message: 'Informe seu nome',
+      trigger: 'input-name-coordenador',
     },
     {
       id: 'aluno-response',
@@ -58,6 +92,30 @@ function App() {
       trigger: 'input-matricula',
     },
     {
+      id: 'input-name-coordenador',
+      user: true,
+      validator: (value) => {
+        if (/^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/.test(value)) {
+          setNome(value);
+          return true;
+        }
+        else {
+          return 'Por favor, digite apenas letras.';
+        }
+      },
+      trigger: 'matricula-coord',
+    },
+    {
+      id: 'matricula',
+      message: 'Informe sua matrícula:',
+      trigger: 'input-matricula',
+    },
+    {
+      id: 'matricula-coord',
+      message: 'Informe seu ID de coordenador',
+      trigger: 'input-matricula-coord',
+    },
+    {
       id: 'input-matricula',
       user: true,
       validator: (value) => {
@@ -70,6 +128,25 @@ function App() {
         }
       },
       trigger: 'email',
+    },
+    {
+      id: 'input-matricula-coord',
+      user: true,
+      validator: (value) => {
+        if (/^[0-9]*$/.test(value)) {
+          setMatricula(value);
+          return true;
+        }
+        else {
+          return 'Por favor, digite apenas números.';
+        }
+      },
+      trigger: 'pagina-coord',
+    },
+    {
+      id: 'pagina-coord',
+      message: 'Encaminhado para a página do coordenador',
+      trigger: goToCoord, // AQUII CHAMADA DA ROTA !!
     },
     {
       id: 'email',
@@ -410,7 +487,8 @@ function App() {
       validator: (value) => {
         if (value != "") {
           setMessage(value);          
-          return true;
+          
+          return true;          
         }
         else {
           return 'Por favor, digite uma pergunta válida.';
@@ -420,7 +498,7 @@ function App() {
     },
     {
       id: 'criacao_perg_pers',
-      message: 'Sua pergunta será enviada ao coordenador. (falta implementar)',
+      message: 'Sua pergunta já foi enviada ao coordenador, aguarde retorno.',
       trigger: 'nova_pergunta',
     },
     {
@@ -441,12 +519,12 @@ function App() {
       end: true,
     },
   ];
-
-  return (    
-    <div >
+  
+  return (
+    <div> 
       <ChatBotWrapper steps={steps} />
     </div>
-  );
+  );  
 }
 
 export default App;
