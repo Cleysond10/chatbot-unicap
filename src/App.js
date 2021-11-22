@@ -20,12 +20,12 @@ const ADD_QUEST = gql`
 }
 `;
 
-function App() { 
+function App() {
 
   const [nome, setNome] = useState('');
   const [matricula, setMatricula] = useState(0);
-  const [email, setEmail] = useState('');  
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState('');
+const [message, setMessage] = useState('');
 
   useEffect(() => {
     if(message != '') {
@@ -43,7 +43,7 @@ function App() {
   const goToCoord = () => {
     history.push('/dashboard'); 
   };
-  
+
   const steps = [
     {
       id: '0',
@@ -177,12 +177,206 @@ function App() {
       options: [
         { value: 'a', label: 'Dúvidas gerais sobre estágio', trigger: 'dúvidas_gerais' },
         { value: 'b', label: 'Dúvidas sobre as partes envolvidas no estágio', trigger: 'dúvidas_partes' },   
-        { value: 'c', label: 'Dúvidas sobre contrato de estágio', trigger: 'dúvidas_contrato' },
-        { value: 'd', label: 'Dúvidas sobre as atividades desenvolvidas durante o estágio', trigger: 'dúvidas_atividades' },// coord-response não é o trigger, não foi desenvolvido ainda. 
-        { value: 'e', label: 'Dúvidas sobre direito dos estagiários', trigger: 'coord-response' },// coord-response não é o trigger, não foi desenvolvido ainda. 
-        { value: 'f', label: 'Dúvidas sobre o termo de compromisso de estágio', trigger: 'coord-response' }, // coord-response não é o trigger, não foi desenvolvido ainda. 
+        { value: 'c', label: 'Dúvidas sobre contrato de estágio', trigger: 'dúvidas_contrato' }, 
+        { value: 'd', label: 'Dúvidas sobre as atividades desenvolvidas durante o estágio', trigger: 'dúvidas_atividades' }, 
+        { value: 'e', label: 'Dúvidas sobre direito dos estagiários', trigger: 'dúvidas_direito' }, 
+        { value: 'f', label: 'Dúvidas sobre o termo de compromisso de estágio', trigger: 'dúvidas_compromisso' },
       ]
     },
+
+{
+id: 'dúvidas_direito',
+message: 'Selecione uma opção abaixo:',
+trigger: 'perguntas_direito',
+},
+  
+{
+id: 'perguntas_direito',
+options: [
+ { value: 'a', label: 'Dúvidas específicas sobre Deveres.', trigger: 'chamada_deveres' },
+ { value: 'b', label: 'Dúvidas específicas sobre Direitos.', trigger: 'chamada_direitos' },
+]
+},
+  
+{
+id: 'chamada_deveres',
+message: 'Selecione uma opção abaixo:',
+trigger: 'perguntas_direito1',
+},
+  
+{
+id: 'perguntas_direito1',
+options: [
+ { value: 'a', label: 'Quais são as obrigações legais das instituições de ensino em relação aos seus estagiários?', trigger: 'resp_14' },
+ { value: 'b', label: 'Quais são as principais obrigações da parte concedente na relação de estágio?', trigger: 'resp_15' },
+]
+},
+  
+{
+id: 'chamada_direitos',
+message: 'Selecione uma opção abaixo:',
+trigger: 'perguntas_direito2',
+},
+  
+{
+id: 'perguntas_direito2',
+options: [
+ { value: 'a', label: 'O estagiário é segurado obrigatório do Regime Geral da Previdência Social?', trigger: 'resp_27' },
+ { value: 'b', label: 'O estagiário tem direito a recesso?', trigger: 'resp_28' },
+ { value: 'c', label: 'O recesso deve ser remunerado?', trigger: 'resp_29' },
+ { value: 'd', label: 'Deve ser aplicada ao estagiário a legislação relacionada à saúde e à segurança no trabalho?', trigger: 'resp_30' },
+ { value: 'e', label: 'O estagiário tem direito ao seguro contra acidentes pessoais? Qual a cobertura do seguro?', trigger: 'resp_31' },
+ { value: 'f', label: 'Dúvidas específicas sobre Bolsas, Auxílios e Benefícios.', trigger: 'chamada_bolsas' },
+]
+},
+  
+{
+id: 'chamada_bolsas',
+message: 'Selecione uma opção abaixo:',
+trigger: 'perguntas_direito2.1',
+},
+  
+{
+id: 'perguntas_direito2.1',
+options: [
+ { value: 'a', label: 'Quando o estágio deve ser obrigatoriamente remunerado (concessão de bolsa ou outra forma de contraprestação)?', trigger: 'resp_22' },
+ { value: 'b', label: 'O que é o auxílio-transporte?', trigger: 'resp_23' },
+ { value: 'c', label: 'Quando é obrigatória a concessão do auxílio-transporte ao estagiário?', trigger: 'resp_24' },
+ { value: 'd', label: 'Podem, a critério da parte concedente, ser concedidos outros benefícios ao estagiário?', trigger: 'resp_25' },
+ { value: 'e', label: 'As ausências do estagiário podem ser descontadas do valor da bolsa?', trigger: 'resp_26' },
+]
+},
+  
+//------------------------------------------------------------------------------------------------------
+  
+{
+id: 'dúvidas_compromisso',
+message: 'Selecione uma opção abaixo:',
+trigger: 'perguntas_compromisso',
+},
+  
+{
+id: 'perguntas_compromisso',
+options: [
+ { value: 'a', label: 'A celebração de convênio de concessão de estágio entre a instituição de ensino e a parte concedente dispensa a celebração do termo de compromisso de estágio?', trigger: 'resp_16' },
+ { value: 'b', label: 'O que é o termo de compromisso de estágio?', trigger: 'resp_32' },
+ { value: 'c', label: 'O que deve constar no Termo de Compromisso?', trigger: 'resp_33' },
+ { value: 'd', label: 'O plano de atividades do estagiário deve ser incorporado ao termo de compromisso de estágio?', trigger: 'resp_34' },
+ { value: 'e', label: 'O agente de integração pode atuar como representante do estagiário, da parte concedente ou da instituição de ensino no Termo de Compromisso de Estágio?', trigger: 'resp_35' },
+ { value: 'f', label: 'O Termo de Compromisso de Estágio pode ser rescindido antes do seu término?', trigger: 'resp_36' },
+]
+},
+  
+//------------------------------------------------------------------------------------------------------
+  
+{
+id: 'resp_14',
+message: 'são obrigações das instituições de ensino, em relação aos estágios de seus estudantes: a) celebrar termo de compromisso com o estudante ou com seu representante ou assistente legal, quando ele for absoluta ou relativamente incapaz e com a parte concedente, indicando as condições de adequação do estágio à proposta pedagógica do curso, à etapa e à modalidade da formação escolar do estudante e ao horário e calendário escolar; b) avaliar as instalações da parte concedente do estágio e sua adequação à formação cultural e profissional do estudante; c) indicar professor orientador da área a ser desenvolvida no estágio, como responsável pelo acompanhamento e avaliação das atividades do estagiário; d) exigir do estudante a apresentação periódica, em prazo não superior a seis meses, de relatório das atividades, do qual deverá constar visto do orientador da instituição de ensino e do supervisor da parte concedente; e) zelar pelo cumprimento do termo de compromisso, reorientando o estagiário para outro local em caso de descumprimento de suas normas; f) elaborar normas complementares e instrumentos de avaliação dos estágios de seus estudantes; g) comunicar à parte concedente do estágio, no início do período letivo, as datas de realização de avaliações escolares ou acadêmicas. (incisos I a VII do art. 7º)',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_15',
+message: 'são obrigações da concedente de estágio: a) celebrar termo de compromisso com a instituição de ensino e com o estudante, zelando por seu cumprimento; b) ofertar instalações que tenham condições de proporcionar ao estudante atividades de aprendizagem social, profissional e cultural; c) indicar funcionário de seu quadro de pessoal, com formação ou experiência profissional na área de conhecimento desenvolvida no curso do estagiário, para orientar e supervisionar até 10 (dez) estagiários simultaneamente; d) contratar em favor do estagiário seguro contra acidentes pessoais, cuja apólice seja compatível com valores de mercado, conforme fique estabelecido no termo de compromisso, podendo, alternativamente, na hipótese de estágio obrigatório, ser assumida pela instituição de ensino; e) entregar termo de realização do estágio com indicação resumida das atividades desenvolvidas, dos períodos e da avaliação de desempenho por ocasião do desligamento do estagiário; f) manter à disposição da fiscalização documentos que comprovem a relação de estágio; g) enviar à instituição de ensino, com periodicidade mínima de 6 (seis) meses, relatório de atividades, com vista obrigatória ao estagiário; h) implementar a legislação relacionada à saúde e à segurança do trabalho a ser aplicada ao estagiário.(incisos I a VII e parágrafo único do art. 9º e art. 14).',
+trigger: 'nova_pergunta',
+},
+  
+  {
+  id: 'resp_27',
+  message: 'não. O estagiário, porém, pode inscrever-se e contribuir como segurado facultativo da Previdência Social (§ 2º do art. 12).',
+  trigger: 'nova_pergunta',
+  },
+  
+{
+id: 'resp_28',
+message: 'sim. É assegurado ao estagiário, sempre que o estágio tenha duração igual ou superior a 1 (um) ano, período de recesso de 30 (trinta) dias. Nos casos de o estágio ter duração inferior a 1 (um) ano, os dias de recesso serão concedidos de maneira proporcional. O recesso deve ser gozado, preferencialmente, durante as férias escolares (caput e § 2º do art. 13). O recesso poderá ser concedido em período contínuo ou fracionado, conforme estabelecido no termo de compromisso de estágio (Cartilha Esclarecedora sobre a Lei de Estágio/ MTE).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_29',
+message: 'o recesso deve ser remunerado somente quando o estagiário receber bolsa ou outra forma da contraprestação (§1º do art.13).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_30',
+message: 'sim. Devem ser tomados os cuidados necessários para a promoção da saúde e prevenção de doenças e acidentes, considerando, principalmente, os riscos decorrentes de fatores relacionados aos ambientes, condições e formas de organização do trabalho. Sua implementação é de responsabilidade da parte concedente do estágio. (art. 14º Lei 11.788/2008 e Cartilha Esclarecedora sobre a Lei de Estágio/MTE).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_31',
+message: 'sim. O seguro deve abranger acidentes pessoais ocorridos com o estudante durante o período de vigência do estágio, 24 (vinte e quatro) horas/dia, no território nacional, assim como morte ou invalidez permanente, total ou parcial, provocada por acidente. O valor da indenização deve constar do Certificado Individual de Seguro de Acidentes Pessoais e deve ser compatível com os valores de mercado. (Cartilha Esclarecedora sobre a Lei de Estágio/ MTE).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_22',
+message: 'no caso do estágio não obrigatório, é compulsória a concessão de bolsa ou outra forma de contraprestação que venha a ser acordada no termo de compromisso do estágio. Somente no caso de estágio obrigatório é que a concessão de bolsa ou outra forma de contraprestação é facultativa. (art. 12).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_23',
+message: 'é uma concessão, feita pela instituição concedente, de recursos financeiros para auxiliar nas despesas de deslocamento do estagiário ao local de estágio e seu retorno. Esse auxílio financeiro pode ser substituído por transporte próprio da empresa. Deve constar do termo de compromisso de estágio (Cartilha Esclarecedora sobre a Lei de Estágio/MTE).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_24',
+message: 'no caso do estágio não obrigatório, é compulsória a concessão de auxílio-transporte. No caso de estágio obrigatório, a concessão de auxílio transporte é facultativa (art. 12).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_25',
+message: 'sim. A eventual concessão de benefícios relacionados a transporte, alimentação e saúde, entre outros, não caracteriza vínculo empregatício para todos os fins da legislação trabalhista e da previdenciária (§ 1º do art. 12).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_26',
+message: 'sim. A remuneração das atividades de estágio, por meio de bolsa ou outra forma de contraprestação, pressupõe o cumprimento das atividades previstas no termo de compromisso de estágio. Ausências eventuais, devidamente justificadas, poderão ser objetos de entendimento entre as partes, e poderão, na forma acordada, deixar de ser descontadas. (Cartilha Esclarecedora sobre a Lei de Estágio/MTE).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_16',
+message: 'não. A celebração de convênio de concessão de estágio entre a instituição de ensino e a parte concedente não dispensa a celebração do termo de compromisso de estágio (parágrafo único do art. 8º).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_32',
+message: 'o termo de compromisso de estágio – TCE – é um acordo tripartite celebrado entre o estudante, a parte concedente do estágio e a instituição de ensino, prevendo as condições de adequação do estágio à proposta pedagógica do curso, à etapa e à modalidade da formação escolar do estudante e ao horário e calendário escolar. (Cartilha Esclarecedora sobre a Lei de Estágio/MTE).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_33',
+message: 'devem constar, no Termo de Compromisso, todas as cláusulas que nortearão o termo de compromisso de estágio, tais como: a) dados de identificação das partes, inclusive cargo e função do supervisor do estágio da parte concedente e do orientador da instituição de ensino; b) as responsabilidades de cada uma das partes; c) objetivo do estágio; d) definição da área do estágio; e) plano de atividades do estágio com vigência; f) a jornada de atividades do estagiário; g) a definição do intervalo na jornada diária, se for o caso; h) vigência do termo de compromisso do estágio; i) período de concessão do recesso, que deve ocorrer na vigência do estágio, destacando sua concessão de forma contínua ou fracionada; j) valor da bolsa, ou outra forma de contra prestação; k) valor do auxílio-transporte, ou sua substituição por transporte próprio da empresa; l) outros benefícios a serem concedidos ao estagiário, quando for o caso; m) o número da apólice e a companhia de seguros; n) motivos de rescisão. (Cartilha Esclarecedora sobre a Lei de Estágio/ MTE).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_34',
+message: 'sim. O plano de atividades do estagiário, elaborado de comum acordo entre o estudante, a parte concedente e a instituição de ensino, deve ser incorporado ao termo de compromisso de estágio. E, à medida que for avaliado, progressivamente, o desempenho do estudante, deve ser incorporado ao termo de compromisso por meio de aditivos (parágrafo único do art. 7º).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_35',
+message: 'não. O termo de compromisso deve ser firmado pelo estagiário ou com seu representante ou assistente legal e pelos representantes legais da parte concedente e da instituição de ensino, vedada a atuação dos agentes de integração como representante de qualquer das partes (art. 16).',
+trigger: 'nova_pergunta',
+},
+  
+{
+id: 'resp_36',
+message: 'sim. O Termo de Compromisso de Estágio pode ser rescindido unilateralmente pelas partes e a qualquer momento. (Cartilha Esclarecedora sobre a Lei de Estágio/MTE).',
+trigger: 'nova_pergunta',
+},
+
     {
       id: 'dúvidas_gerais',
       message: 'Selecione uma opção abaixo:',
@@ -501,6 +695,7 @@ function App() {
       message: 'Sua pergunta já foi enviada ao coordenador, aguarde retorno.',
       trigger: 'nova_pergunta',
     },
+
     {
       id: 'nova_pergunta',
       message: 'Deseja tirar uma nova dúvida?.',
@@ -519,12 +714,12 @@ function App() {
       end: true,
     },
   ];
-  
-  return (
-    <div> 
+
+  return (    
+    <div>
       <ChatBotWrapper steps={steps} />
     </div>
-  );  
+  );
 }
 
 export default App;
