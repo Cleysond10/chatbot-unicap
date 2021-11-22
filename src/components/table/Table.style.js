@@ -1,12 +1,13 @@
 import styled from 'styled-components';
+import { Table as MuiTable, TableCell as MuiTableCell } from '@material-ui/core';
 
-export const TableWrapper = styled.div`
-  table{
-    width:100%;
-  }
-  table, th, td {
-    border:1px solid black;
-    text-align: center;
-    vertical-align: center;
-  }
+
+export const Table = styled(MuiTable)`
+  background-color: #690013;
+  text-align: center;
+  vertical-align: center;
+`
+
+export const TableCell = styled(MuiTableCell)`
+  color: #9d7628 !important;
 `
