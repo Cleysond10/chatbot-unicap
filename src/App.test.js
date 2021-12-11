@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom'
 import App from "./App"
 
-describe('Test Table Component', () => {
+describe('Test chat bot Components', () => {
   it('Should show chat title', () => {
     render(
       <App />
