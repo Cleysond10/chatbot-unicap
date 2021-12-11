@@ -3,22 +3,22 @@ import { useState, useEffect } from 'react';
 import { ChatBotWrapper } from './App.style';
 import { useHistory } from 'react-router-dom'
 
-import {
-  useMutation,
-  gql
-} from "@apollo/client";
+// import {
+//   useMutation,
+//   gql
+// } from "@apollo/client";
 
-const ADD_QUEST = gql`
-  mutation AddTodos($nome_aluno: String!, $mat_aluno: String!, $email_aluno: String!, $pergunta: String!) {
-  insert_perguntas_aluno(objects: {nome_aluno: $nome_aluno, mat_aluno: $mat_aluno, email_aluno: $email_aluno, pergunta: $pergunta}) {
-    returning {
-      mat_aluno
-      pergunta
-      nome_aluno
-    }
-  }
-}
-`;
+// const ADD_QUEST = gql`
+//   mutation AddTodos($nome_aluno: String!, $mat_aluno: String!, $email_aluno: String!, $pergunta: String!) {
+//   insert_perguntas_aluno(objects: {nome_aluno: $nome_aluno, mat_aluno: $mat_aluno, email_aluno: $email_aluno, pergunta: $pergunta}) {
+//     returning {
+//       mat_aluno
+//       pergunta
+//       nome_aluno
+//     }
+//   }
+// }
+// `;
 
 function App() {
 
@@ -27,17 +27,17 @@ function App() {
   const [email, setEmail] = useState('');
 const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    if(message != '') {
-      addQuestionMutation({ variables: 
-        { nome_aluno: nome, mat_aluno: matricula + "",
-         email_aluno: email, pergunta: message } // Como matricula é um inteiro(NUMBER), precisei converter pra String com aspas vazias.
-        });
-      console.log(data);
-    }
-  }, [message]);
+  // useEffect(() => {
+  //   if(message != '') {
+  //     addQuestionMutation({ variables: 
+  //       { nome_aluno: nome, mat_aluno: matricula + "",
+  //        email_aluno: email, pergunta: message } // Como matricula é um inteiro(NUMBER), precisei converter pra String com aspas vazias.
+  //       });
+  //     console.log(data);
+  //   }
+  // }, [message]);
   
-  const [addQuestionMutation, {data}] = useMutation(ADD_QUEST); 
+  // const [addQuestionMutation, {data}] = useMutation(ADD_QUEST); 
  
   const history = useHistory();
   const goToCoord = () => {
