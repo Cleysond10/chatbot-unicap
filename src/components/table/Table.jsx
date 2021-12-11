@@ -18,7 +18,7 @@ const TableComponent = (({ customQuestions }) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table stickyHeader aria-label="sticky table">
+      <Table data-testid="table" stickyHeader aria-label="sticky table">
         <TableHead>
           <TableRow>
             <TableCell >#</TableCell >
@@ -27,11 +27,11 @@ const TableComponent = (({ customQuestions }) => {
             <TableCell >Resposta</TableCell >
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody data-testid="table-body">
           {customQuestions
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map(question => (
-            <TableRow hover key={question.id}>
+            <TableRow data-testid="table-body-row" hover key={question.id}>
               <TableCell > {question.id} </TableCell >
               <TableCell > {question.aluno} </TableCell >
               <TableCell > {question.pergunta} </TableCell >
@@ -41,6 +41,7 @@ const TableComponent = (({ customQuestions }) => {
         </TableBody>
       </Table>
       <TablePagination
+        data-testid="table-pagination"
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={customQuestions.length}
